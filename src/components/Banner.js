@@ -10,7 +10,7 @@ export default function Banner({data}) {
             <Col className="p-4 text-center">
                 <h1>{title}</h1>
                 <p>{content}</p>
-                <Link className="btn btn-primary" to={destination}>{label}</Link>
+                <Link className="btn btn-danger" to={destination}>{label}</Link>
             </Col>
         </Row>
     )

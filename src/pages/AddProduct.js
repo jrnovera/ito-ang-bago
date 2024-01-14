@@ -100,7 +100,7 @@ export default function AddProduct() {
             }}
           />
         </Form.Group>
-        <Button variant="primary" type="submit" className="my-5">
+        <Button variant="danger" type="submit" className="my-5">
           Submit
         </Button>
       </Form>

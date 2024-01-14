@@ -125,7 +125,7 @@ const UpdateProfile = ({ userDetails }) => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-danger">
           Update Profile
         </button>
       </form>

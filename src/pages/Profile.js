@@ -48,7 +48,7 @@ export default function Profile() {
     ) : (
       <>
         <Row>
-          <Col className="p-5 bg-primary text-white">
+          <Col className="p-5">
             <h1 className="my-5 ">Profile</h1>
             {/* <h2 className="mt-3">James Dela Cruz</h2> */}
             <h2 className="mt-3">{`${details.firstName} ${details.lastName}`}</h2>
@@ -68,9 +68,9 @@ export default function Profile() {
         <Row>
           <UpdateProfile userDetails={details} />
         </Row>
-        <Row>
+        {/* <Row>
           <SearchProductByPrice />
-        </Row>
+        </Row> */}
       </>
     )
   );

@@ -2,6 +2,7 @@ import { Form, Button } from 'react-bootstrap';
 import {useState, useEffect, useContext} from 'react';
 import UserContext from '../UserContext';
 import {Navigate} from "react-router-dom";
+import Swal from 'sweetalert2'
 
 export default function Login() {
 
@@ -25,45 +26,53 @@ export default function Login() {
     }, [email, password]);
 
     function authenticate(e) {
-
-        // Prevents page redirection via form submission
-        e.preventDefault();
-
-		fetch('http://localhost:4000/users/login',{
-			method: 'POST',
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				email: email,
-				password: password
-			})
+		e.preventDefault();
+	  
+		fetch('http://localhost:4000/users/login', {
+		  method: 'POST',
+		  headers: {
+			'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify({
+			email: email,
+			password: password,
+		  }),
 		})
-		.then(res => res.json())
-		.then(data => {
-			// successful login
-			if(data.access){
+		  .then((res) => res.json())
+		  .then((data) => {
+			if (data.access) {
+			  localStorage.setItem('access', data.access);
+			  retrieveUserDetails(data.access);
+	  
+			  Swal.fire({
+				icon: 'success',
+				title: 'Login Successful',
+				text: 'You are now logged in',
+				confirmButtonText: 'OK',
+			  }).then(() => {
 
-				localStorage.setItem('access', data.access);
-				// setUser(data); // user = {access: adskjaslkdqwk }
-				retrieveUserDetails(data.access);
+				window.location.href = '/products';
+			  });
+			} else if (data.error === 'No Email Found') {
 
-				alert(`You are now logged in`);
-
-			
-			} else if (data.error == "No Email Found") {
-
-				alert(`Email not found`);
-
+			  Swal.fire({
+				icon: 'error',
+				title: 'Email not found',
+				confirmButtonText: 'OK',
+			  });
 			} else {
 
-				alert(`${email} does not exist`)
+			  Swal.fire({
+				icon: 'error',
+				title: `${email} does not exist`,
+				confirmButtonText: 'OK',
+			  });
 			}
-		})
-		// Clear input fields after submission
+		  });
+	  
 		setEmail('');
 		setPassword('');
-	}
+	  }
 
 	const retrieveUserDetails = (token) => {
 
@@ -83,44 +92,47 @@ export default function Login() {
 		})
 	}
 
-    return ( 
-      	(user.id !== null)?
-      		<Navigate to="/courses" />
-      	:
-		    <Form onSubmit={(e) => authenticate(e)}>
-		    	<h1 className="my-5 text-center">Login</h1>
-		        <Form.Group controlId="userEmail">
-		            <Form.Label>Email address</Form.Label>
-		            <Form.Control 
-		                type="email" 
-		                placeholder="Enter email"
-		                value={email}
-		    			onChange={(e) => setEmail(e.target.value)}
-		                required
-		            />
-		        </Form.Group>
-
-		        <Form.Group controlId="password">
-		            <Form.Label>Password</Form.Label>
-		            <Form.Control 
-		                type="password" 
-		                placeholder="Password"
-		                value={password}
-		    			onChange={(e) => setPassword(e.target.value)}
-		                required
-		            />
-		        </Form.Group>
-
-		         { isActive ? 
-	                <Button variant="primary" type="submit" id="submitBtn">
-	                    Submit
-	                </Button>
-	                : 
-	                <Button variant="danger" type="submit" id="submitBtn" disabled>
-	                    Submit
-	                </Button>
-	            }
-		    </Form>
-	)
-}
-
+	return (
+		(user.id !== null) ?
+		  <Navigate to="/products" />
+		  :
+		  <div className="container" style={{ maxWidth: "400px" }}>
+			<div className="mx-auto">
+			  <Form onSubmit={(e) => authenticate(e)}>
+				<h1 className="my-5 text-center">Login</h1>
+				<Form.Group controlId="userEmail">
+				  <Form.Label>Email address</Form.Label>
+				  <Form.Control
+					type="email"
+					placeholder="Enter email"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+					required
+				  />
+				</Form.Group>
+	
+				<Form.Group controlId="password">
+				  <Form.Label>Password</Form.Label>
+				  <Form.Control
+					type="password"
+					placeholder="Password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					required
+				  />
+				</Form.Group>
+	
+				{isActive ?
+				  <Button variant="primary" type="submit" id="submitBtn">
+					Submit
+				  </Button>
+				  :
+				  <Button variant="danger" type="submit" id="submitBtn" disabled>
+					Submit
+				  </Button>
+				}
+			  </Form>
+			</div>
+		  </div>
+	  );
+	};

@@ -4,6 +4,7 @@ import ProductCard from "../components/ProductCard";
 import UserContext from "../UserContext";
 import UserView from "../components/UserView";
 import AdminView from "../components/AdminView";
+// import ProductSearch from '../components/ProductSearch'; 
 
 export default function Product() {
   const { user } = useContext(UserContext);
@@ -51,8 +52,10 @@ export default function Product() {
 
   return (
     <>
+      {/* <ProductSearch /> */}
       {user.isAdmin === true ? (
         <AdminView productData={product} fetchData={fetchData} />
+        
       ) : (
         <UserView productData={product} />
       )}
