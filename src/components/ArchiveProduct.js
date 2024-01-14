@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
-export default function ArchiveCourse({ courseId, fetchData, isActive }) {
+export default function ArchiveCourse({ productId, fetchData, isActive }) {
   function archiveToggle() {
-    fetch(`http://localhost:4000/courses/${courseId}/archive`, {
+    fetch(`http://localhost:4000/products/${productId}/archive`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -33,7 +33,7 @@ export default function ArchiveCourse({ courseId, fetchData, isActive }) {
   }
 
   function activateToggle() {
-    fetch(`http://localhost:4000/courses/${courseId}/activate`, {
+    fetch(`http://localhost:4000/products/${productId}/activate`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,

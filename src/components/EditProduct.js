@@ -56,7 +56,7 @@ export default function EditProduct({ product, fetchData }) {
   const editProduct = (e, productId) => {
     e.preventDefault();
 
-    fetch(`${process.env.REACT_APP_API_URL}/product/${productId}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

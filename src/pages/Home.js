@@ -5,10 +5,10 @@ import FeaturedProduct from "../components/FeaturedProduct";
 
 export default function Error() {
   const data = {
-    title: "Zuitt Coding Bootcamp",
-    content: "Opportunies for everyone everwhere",
+    title: "GadgetCo.",
+    content: "Bringing Innovation to Your Fingertips",
     destination: "/products",
-    label: "Enroll now!",
+    label: "Gadgets On Sale",
   };
 
   return (

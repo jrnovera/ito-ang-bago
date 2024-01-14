@@ -22,7 +22,7 @@ export default function AppNavbar() {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
-          Zuitt Booking
+          GadgetCo.
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -42,6 +42,7 @@ export default function AppNavbar() {
                   <Nav.Link as={NavLink} to="/profile">
                     Profile
                   </Nav.Link>
+
                   <Nav.Link as={NavLink} to="/logout">
                     Logout
                   </Nav.Link>
@@ -50,6 +51,9 @@ export default function AppNavbar() {
                 <>
                   <Nav.Link as={NavLink} to="/profile">
                     Profile
+                  </Nav.Link>
+                  <Nav.Link as={NavLink} to="/cart">
+                    Cart
                   </Nav.Link>
                   <Nav.Link as={NavLink} to="/logout">
                     Logout
