@@ -3,7 +3,7 @@ import Banner from "../components/Banner";
 import Highlights from "../components/Highlights";
 import FeaturedProduct from "../components/FeaturedProduct";
 
-import ProductCatalog from "../components/ProductsCatalog";
+// import ProductCatalog from "../components/ProductsCatalog";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -35,7 +35,7 @@ export default function Home() {
       <Banner data={data} />
       <FeaturedProduct />
       <Highlights />
-      {loading ? <p>Loading...</p> : <ProductCatalog products={products} />}
+    {/* {loading ? <p>Loading...</p> : <ProductCatalog products={products} />} */}
     </>
   );
 }

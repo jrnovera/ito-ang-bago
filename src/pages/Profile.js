@@ -48,29 +48,11 @@ export default function Profile() {
     ) : (
       <>
         <Row>
-          <Col className="p-5">
-            <h1 className="my-5 ">Profile</h1>
-            {/* <h2 className="mt-3">James Dela Cruz</h2> */}
-            <h2 className="mt-3">{`${details.firstName} ${details.lastName}`}</h2>
-            <hr />
-            <h4>Contacts</h4>
-            <ul>
-              {/* <li>Email: {user.email}</li> */}
-              <li>Email: {details.email}</li>
-              {/* <li>Mobile No: 09266772411</li> */}
-              <li>Mobile No: {details.mobileNo}</li>
-            </ul>
-          </Col>
-        </Row>
-        <Row>
           <ResetPassword />
         </Row>
         <Row>
           <UpdateProfile userDetails={details} />
         </Row>
-        {/* <Row>
-          <SearchProductByPrice />
-        </Row> */}
       </>
     )
   );

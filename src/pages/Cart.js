@@ -1,29 +1,40 @@
-// CartPage.js
 import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
-
+import RemoveFromCartButton from "../components/RemoveFromCartButton";
 import CheckoutAndTotalButton from "../components/CheckOutTOTAL";
+import ClearCartButton from "../components/ClearCartButton";
+
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
 
-  useEffect(() => {
-    // Fetch cart items from the server
-    fetch(`http://localhost:4000/cart/get-cart`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // Update state with cart items
-        setCartItems(data.items || []);
-      })
-      .catch((error) => {
-        console.error("Error fetching cart items:", error);
-        // Handle errors if needed
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/cart/get-cart", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
       });
-  }, []); // No need to include fetchData in the dependency array
+
+      if (!response.ok) {
+        throw new Error("Error fetching cart items");
+      }
+    
+    const data = await response.json();
+      console.log(data);
+      setCartItems(data.items || []);
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+      // Handle errors if needed
+    }
+  };
+
+  useEffect(() => {
+    // Initial fetch when component mounts
+    fetchData();
+  }, []);
+console.log(cartItems);
+
 
   return (
     <div>
@@ -31,6 +42,7 @@ const CartPage = () => {
       <Table striped bordered hover responsive>
         <thead>
           <tr className="text-center">
+            <th>Id</th>
             <th>Product</th>
             <th>Description</th>
             <th>Quantity</th>
@@ -40,11 +52,18 @@ const CartPage = () => {
         </thead>
         <tbody>
           {cartItems.map((item) => (
-            <tr key={item.productId}>
-              <td>{item.productId}</td>
+            <tr key={item._id}>
+              <td>{item._id}</td>
+              <td>{item.productName}</td>
               <td>{item.description}</td>
               <td>{item.quantity}</td>
-              <td>${item.subtotal}</td>
+              <td>{item.subtotal}</td>
+              <td>
+                <RemoveFromCartButton
+                  productId={item._id}
+                  fetchData={fetchData}
+                />
+              </td>
             </tr>
           ))}
         </tbody>
