@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
-import RemoveItemButton from "./RemoveFromCartButton";
+
 import AddToCartButton from "../components/AddtoCart";
 import ClearCartButton from "./ClearCartButton";
 
@@ -48,7 +48,6 @@ const ProductCard = ({ product, fetchData }) => {
         <Card.Text>Price: ${price}</Card.Text>
         <div className="text-center">
           <AddToCartButton productId={_id} fetchData={fetchData} />
-          <RemoveItemButton productId={_id} fetchData={fetchData} />
         </div>
       </Card.Body>
     </Card>

@@ -53,7 +53,7 @@ const CartPage = () => {
           {cartItems.map((item) => (
             <tr key={item._id}>
               <td>{item._id}</td>
-              <td>{item.productName}</td>
+              <td>{item.product}</td>
               <td>{item.description}</td>
               <td>{item.quantity}</td>
               <td>{item.subtotal}</td>
