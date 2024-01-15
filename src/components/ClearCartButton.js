@@ -20,6 +20,7 @@ const ClearCartButton = ({ removeAll }) => {
             icon: "success",
             title: data.message,
           });
+          window.location.reload();
 
           removeAll();
         } else {

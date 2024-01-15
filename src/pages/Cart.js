@@ -19,8 +19,8 @@ const CartPage = () => {
       if (!response.ok) {
         throw new Error("Error fetching cart items");
       }
-    
-    const data = await response.json();
+
+      const data = await response.json();
       console.log(data);
       setCartItems(data.items || []);
     } catch (error) {
@@ -33,8 +33,7 @@ const CartPage = () => {
     // Initial fetch when component mounts
     fetchData();
   }, []);
-console.log(cartItems);
-
+  console.log(cartItems);
 
   return (
     <div>
@@ -68,6 +67,7 @@ console.log(cartItems);
           ))}
         </tbody>
       </Table>
+      <ClearCartButton cartItems={cartItems} />
       <CheckoutAndTotalButton cartItems={cartItems} />
     </div>
   );

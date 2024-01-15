@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Banner from "../components/Banner";
 import Highlights from "../components/Highlights";
 import FeaturedProduct from "../components/FeaturedProduct";
+import RandomGadgetCarousel from "../components/Caurosel";
 
 // import ProductCatalog from "../components/ProductsCatalog";
 
@@ -33,9 +34,10 @@ export default function Home() {
   return (
     <>
       <Banner data={data} />
+      <RandomGadgetCarousel />
       <FeaturedProduct />
       <Highlights />
-    {/* {loading ? <p>Loading...</p> : <ProductCatalog products={products} />} */}
+      {/* {loading ? <p>Loading...</p> : <ProductCatalog products={products} />} */}
     </>
   );
 }

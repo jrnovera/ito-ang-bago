@@ -35,6 +35,7 @@ const SearchProductByPrice = () => {
             text: `${data.products.length} products match the specified criteria.`,
           });
           setProducts(data.products);
+          
 
           // Scroll to the last product in the list
           lastProductRef.current.scrollIntoView({ behavior: "smooth" });
