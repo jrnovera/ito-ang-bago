@@ -1,8 +1,8 @@
 // CartPage.js
 import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
-import TotalButton from "../components/TotalButton";
-import CheckoutButton from "../components/CheckOutButton";
+
+import CheckoutAndTotalButton from "../components/CheckOutTOTAL";
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
 
@@ -49,8 +49,7 @@ const CartPage = () => {
           ))}
         </tbody>
       </Table>
-      <CheckoutButton cartItems={cartItems} />
-      <TotalButton cartItems={cartItems} />
+      <CheckoutAndTotalButton cartItems={cartItems} />
     </div>
   );
 };
