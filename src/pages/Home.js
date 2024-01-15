@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Banner from "../components/Banner";
 import Highlights from "../components/Highlights";
 import FeaturedProduct from "../components/FeaturedProduct";
+
 import ProductCatalog from "../components/ProductsCatalog";
 
 export default function Home() {

@@ -1,5 +1,7 @@
 import {Form, Button} from 'react-bootstrap';
 import {useState, useEffect} from 'react';
+import Swal from 'sweetalert2';
+
 
 export default function Register(){
 
@@ -36,8 +38,7 @@ export default function Register(){
 
 
 	function registerUser(event){
-
-		event.preventDefault(); // prevents the default behavior of an event. Specifically in our case submit event, it will prevent the refresh/redirection of the page
+		event.preventDefault(); 	
 
 		fetch("http://localhost:4000/users/register", {
 			method: 'POST',
@@ -51,66 +52,76 @@ export default function Register(){
 				password: password
 			})
 		})
-		.then(res => res.json())
-		.then(data => {
-			console.log(data);
-			if(data.message === "Registered Successfully"){
-				setFirstName('');
-				setLastName('');
-				setEmail('');
-				setMobileNo('');
-				setPassword('');
-				setConfirmPassword('');
-				alert("Registration Successful");
-			}
-			else{
-				alert("Something went wrong");
-			}
-
+		.then((res) => res.json())
+		.then((data) => {
+		  console.log(data);
+		  if (data.message === "Registered Successfully") {
+			setFirstName('');
+			setLastName('');
+			setEmail('');
+			setMobileNo('');
+			setPassword('');
+			setConfirmPassword('');
+	
+			// Use SweetAlert2 to show a success message
+			Swal.fire({
+			  icon: 'success',
+			  title: 'Registration Successful',
+			  confirmButtonText: 'OK',
+			}).then(() => {
+			  // Navigate to the login page
+			  window.location.href = '/login';
+			});
+		  } else {
+			// Use SweetAlert2 to show an error message
+			Swal.fire({
+			  icon: 'error',
+			  title: 'Something went wrong',
+			  text: 'Please try again later.',
+			  confirmButtonText: 'OK',
+			});
+		  }
 		});
-
-
 	}
 
-	// event.target.value - gets the value from the input box (Form.Control)
-
-	return(
-		<Form onSubmit={(event) => registerUser(event)}>
-			<h1 className="my-5 text-center">Register</h1>
-			<Form.Group>
+	return (
+		<div className="container" style={{ maxWidth: "600px" }}>
+			<div className="mx-auto">
+			<Form onSubmit={(event) => registerUser(event)}>
+			  <h1 className="my-5 text-center">Register</h1>
+			  <Form.Group>
 				<Form.Label>First Name: </Form.Label>
-				<Form.Control type="text" placeholder="Enter First Name" required onChange={event => {setFirstName(event.target.value)}} />
-			</Form.Group>
-			<Form.Group>
-				<Form.Label>Last Name: </Form.Label>
+				<Form.Control type="text" placeholder="Enter First Name" required onChange={(event) => { setFirstName(event.target.value) }} />
+			  </Form.Group>
+			  <Form.Group>
+			<Form.Label>Last Name: </Form.Label>
 				<Form.Control type="text" placeholder="Enter Last Name" required onChange={event => {setLastName(event.target.value)}} />
 			</Form.Group>
 			<Form.Group>
-				<Form.Label>MobileNo: </Form.Label>
+ 			<Form.Label>MobileNo: </Form.Label>
 				<Form.Control type="text" placeholder="Enter MobileNo" required onChange={event => {setMobileNo(event.target.value)}} />
+ 		</Form.Group>
+	 		<Form.Group>
+	 			<Form.Label>Email: </Form.Label>
+ 			<Form.Control type="email" placeholder="Enter Email" required onChange={event => {setEmail(event.target.value)}} />
+	 		</Form.Group>
+	 		<Form.Group>
+	 			<Form.Label>Password: </Form.Label>
+	 			<Form.Control type="password" placeholder="Enter Password" required onChange={event => {setPassword(event.target.value)}} />
 			</Form.Group>
-			<Form.Group>
-				<Form.Label>Email: </Form.Label>
-				<Form.Control type="email" placeholder="Enter Email" required onChange={event => {setEmail(event.target.value)}} />
-			</Form.Group>
-			<Form.Group>
-				<Form.Label>Password: </Form.Label>
-				<Form.Control type="password" placeholder="Enter Password" required onChange={event => {setPassword(event.target.value)}} />
-			</Form.Group>
-			<Form.Group>
-				<Form.Label>Confirm Password: </Form.Label>
-				<Form.Control type="password" placeholder="Confirm Password" required onChange={event => {setConfirmPassword(event.target.value)}} />
-			</Form.Group>
-			{	isActive === true ?
-				<Button variant="primary" type="submit" id="submitBtn" >Submit
-				</Button>
+	 		<Form.Group>
+	 			<Form.Label>Confirm Password: </Form.Label>
+	 			<Form.Control type="password" placeholder="Confirm Password" required onChange={event => {setConfirmPassword(event.target.value)}} />
+	 		</Form.Group>
+			  {isActive === true ?
+				<Button variant="primary" type="submit" id="submitBtn">Submit</Button>
 				:
-				<Button variant="danger" type="submit" id="submitBtn" disabled>Submit
-				</Button>
-			}		
-		</Form>
-	)
+				<Button variant="danger" type="submit" id="submitBtn" disabled>Submit</Button>
+			  }
+			</Form>
+		  </div>
+		</div>
+	  );
+	}
+	
 
-
-
-}
