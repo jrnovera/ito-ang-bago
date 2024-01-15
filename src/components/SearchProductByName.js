@@ -1,30 +1,23 @@
+// SearchProductByName.js
 import React, { useState, useRef } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
-const SearchProductByPrice = () => {
+const SearchProductByName = () => {
   const [products, setProducts] = useState([]);
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const lastProductRef = useRef(null);
 
-  const handleSearchByPrice = () => {
-    searchProducts({ minPrice, maxPrice, name: searchTerm });
-  };
-
   const handleSearchByName = () => {
-    searchProducts({ name: searchTerm });
-  };
-
-  const searchProducts = (params) => {
-    // Send a request to the server to search for products based on the given parameters
+    // Send a request to the server to search for products by name
     fetch(`${process.env.REACT_APP_API_URL}/products/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(params),
+      body: JSON.stringify({
+        name: searchTerm,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -63,7 +56,7 @@ const SearchProductByPrice = () => {
         <Col lg={{ span: 6, offset: 3 }}>
           <Card>
             <Card.Body>
-              <Card.Title>Search Products</Card.Title>
+              <Card.Title>Search Products by Name</Card.Title>
               <Form.Group>
                 <Form.Label>Product Name</Form.Label>
                 <Form.Control
@@ -73,29 +66,8 @@ const SearchProductByPrice = () => {
                   placeholder="Enter product name"
                 />
               </Form.Group>
-              <Form.Group>
-                <Form.Label>Minimum Price</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={minPrice}
-                  onChange={(e) => setMinPrice(e.target.value)}
-                  placeholder="Enter minimum price"
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Maximum Price</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                  placeholder="Enter maximum price"
-                />
-              </Form.Group>
-              <Button variant="primary" block onClick={handleSearchByPrice}>
-                Search by Price
-              </Button>
               <Button variant="primary" block onClick={handleSearchByName}>
-                Search by Name
+                Search
               </Button>
             </Card.Body>
           </Card>
@@ -124,4 +96,4 @@ const SearchProductByPrice = () => {
   );
 };
 
-export default SearchProductByPrice;
+export default SearchProductByName;

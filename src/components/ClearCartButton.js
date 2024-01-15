@@ -1,11 +1,11 @@
-// RemoveItemButton.js
+// ClearCartButton.js
 import React from "react";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
-const RemoveItemButton = ({ productId, fetchData }) => {
-  const handleRemoveFromCart = () => {
-    fetch(`http://localhost:4000/cart/${productId}/remove-from-cart`, {
+const ClearCartButton = ({ removeAll }) => {
+  const handleClearCart = () => {
+    fetch(`http://localhost:4000/cart/clear-cart`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -21,7 +21,7 @@ const RemoveItemButton = ({ productId, fetchData }) => {
             title: data.message,
           });
 
-          fetchData();
+          removeAll();
         } else {
           Swal.fire({
             icon: "error",
@@ -30,18 +30,22 @@ const RemoveItemButton = ({ productId, fetchData }) => {
         }
       })
       .catch((error) => {
-        console.error("Error removing from cart:", error);
+        console.error("Error clearing cart:", error);
       });
   };
 
   return (
     <Button
       variant="danger"
-      style={{ backgroundColor: "pink" }}
-      onClick={handleRemoveFromCart}>
-      Remove from Cart
+      onClick={handleClearCart}
+      style={{
+        // Align to the right
+        margin: "10px 55px",
+        padding: "25px 100px",
+      }}>
+      Clear Cart
     </Button>
   );
 };
 
-export default RemoveItemButton;
+export default ClearCartButton;

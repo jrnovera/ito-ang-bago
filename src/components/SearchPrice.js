@@ -1,3 +1,4 @@
+// SearchProductByPrice.js
 import React, { useState, useRef } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
@@ -6,25 +7,19 @@ const SearchProductByPrice = () => {
   const [products, setProducts] = useState([]);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
   const lastProductRef = useRef(null);
 
   const handleSearchByPrice = () => {
-    searchProducts({ minPrice, maxPrice, name: searchTerm });
-  };
-
-  const handleSearchByName = () => {
-    searchProducts({ name: searchTerm });
-  };
-
-  const searchProducts = (params) => {
-    // Send a request to the server to search for products based on the given parameters
-    fetch(`${process.env.REACT_APP_API_URL}/products/search`, {
+    // Send a request to the server to search for products by price range
+    fetch(`${process.env.REACT_APP_API_URL}/products/searchByPrice`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(params),
+      body: JSON.stringify({
+        minPrice: parseFloat(minPrice),
+        maxPrice: parseFloat(maxPrice),
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -32,7 +27,7 @@ const SearchProductByPrice = () => {
           Swal.fire({
             title: "Products Found",
             icon: "success",
-            text: `${data.products.length} products match the specified criteria.`,
+            text: `${data.products.length} products match the specified price range.`,
           });
           setProducts(data.products);
 
@@ -43,7 +38,7 @@ const SearchProductByPrice = () => {
           Swal.fire({
             title: "No products found",
             icon: "info",
-            text: "No products match the specified criteria.",
+            text: "No products match the specified price range.",
           });
         }
       })
@@ -63,16 +58,7 @@ const SearchProductByPrice = () => {
         <Col lg={{ span: 6, offset: 3 }}>
           <Card>
             <Card.Body>
-              <Card.Title>Search Products</Card.Title>
-              <Form.Group>
-                <Form.Label>Product Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Enter product name"
-                />
-              </Form.Group>
+              <Card.Title>Search Products by Price Range</Card.Title>
               <Form.Group>
                 <Form.Label>Minimum Price</Form.Label>
                 <Form.Control
@@ -92,10 +78,7 @@ const SearchProductByPrice = () => {
                 />
               </Form.Group>
               <Button variant="primary" block onClick={handleSearchByPrice}>
-                Search by Price
-              </Button>
-              <Button variant="primary" block onClick={handleSearchByName}>
-                Search by Name
+                Search
               </Button>
             </Card.Body>
           </Card>

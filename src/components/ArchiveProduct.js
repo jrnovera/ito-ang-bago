@@ -2,7 +2,7 @@
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
-export default function ArchiveCourse({ productId, fetchData, isActive }) {
+export default function ArchiveProducts({ productId, fetchData, isActive }) {
   function archiveToggle() {
     fetch(`http://localhost:4000/products/${productId}/archive`, {
       method: "PUT",
@@ -18,7 +18,7 @@ export default function ArchiveCourse({ productId, fetchData, isActive }) {
         Swal.fire({
           icon: "success",
           title: `Success`,
-          text: `Course successfully Archived`,
+          text: `Product successfully Archived`,
         });
       })
       .catch((error) => {
@@ -47,7 +47,7 @@ export default function ArchiveCourse({ productId, fetchData, isActive }) {
         Swal.fire({
           icon: "success",
           title: `Success`,
-          text: `Course successfully Activated`,
+          text: `Product successfully Activated`,
         });
       })
       .catch((error) => {
@@ -65,11 +65,11 @@ export default function ArchiveCourse({ productId, fetchData, isActive }) {
     <>
       {isActive ? (
         <Button variant="danger" size="sm" onClick={archiveToggle}>
-          Archive Course
+          Archive Products
         </Button>
       ) : (
         <Button variant="success" size="sm" onClick={activateToggle}>
-          Activate Course
+          Activate Products
         </Button>
       )}
     </>

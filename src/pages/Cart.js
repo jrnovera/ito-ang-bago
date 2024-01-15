@@ -1,10 +1,9 @@
 // CartPage.js
 import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
-import AddToCartButton from "../components/AddtoCart";
-import RemoveFromCartButton from "../components/RemoveFromCartButton";
-
-const CartPage = ({ fetchData }) => {
+import TotalButton from "../components/TotalButton";
+import CheckoutButton from "../components/CheckOutButton";
+const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
@@ -24,7 +23,7 @@ const CartPage = ({ fetchData }) => {
         console.error("Error fetching cart items:", error);
         // Handle errors if needed
       });
-  }, [fetchData]); // Include fetchData in the dependency array
+  }, []); // No need to include fetchData in the dependency array
 
   return (
     <div>
@@ -46,20 +45,12 @@ const CartPage = ({ fetchData }) => {
               <td>{item.description}</td>
               <td>{item.quantity}</td>
               <td>${item.subtotal}</td>
-              <td>
-                <AddToCartButton
-                  productId={item.productId}
-                  fetchData={fetchData}
-                />
-                <RemoveFromCartButton
-                  productId={item.productId}
-                  fetchData={fetchData}
-                />
-              </td>
             </tr>
           ))}
         </tbody>
       </Table>
+      <CheckoutButton cartItems={cartItems} />
+      <TotalButton cartItems={cartItems} />
     </div>
   );
 };
