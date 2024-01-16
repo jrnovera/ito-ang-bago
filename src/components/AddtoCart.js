@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const AddToCartButton = ({ productId, fetchData }) => {
   const [quantity, setQuantity] = useState(1);
@@ -46,7 +47,7 @@ const AddToCartButton = ({ productId, fetchData }) => {
   return (
     <>
       <Button variant="primary" onClick={handleAddToCart}>
-        Add to Cart
+        <AddShoppingCartIcon />
       </Button>
       <input
         type="number"

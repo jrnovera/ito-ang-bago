@@ -17,7 +17,7 @@ export default function Product(props) {
         </Card.Body>
         <Card.Footer>
           <h5 className="text-center">P{price}</h5>
-          <Link className="btn btn-danger d-block" to={`products/${_id}`}>
+          <Link className="btn btn-dark d-block" to={`products/${_id}`}>
             Details
           </Link>
         </Card.Footer>

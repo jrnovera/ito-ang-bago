@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import EditProduct from "./EditProduct";
 import ArchiveProduct from "./ArchiveProduct";
-
+import DeleteProductButton from "./DeleteProductButton";
 export default function AdminView({ productData, fetchData }) {
   const [product, setProduct] = useState([]);
 
@@ -32,6 +32,9 @@ export default function AdminView({ productData, fetchData }) {
               fetchData={fetchData}
               isActive={product.isActive}
             />{" "}
+          </td>
+          <td>
+            <DeleteProductButton />
           </td>
         </tr>
       );

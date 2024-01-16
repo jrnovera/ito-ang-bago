@@ -1,13 +1,13 @@
-// CheckoutButton.js
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
-const CheckoutButton = ({ cartItems }) => {
+const CheckoutButton = ({ cartItems, fetchData }) => {
+  const [total, setTotal] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
 
   useEffect(() => {
-    // Check if cartItems is defined before computing total quantity
+    // Calculate total quantity and total amount whenever cart items change
     if (cartItems && cartItems.length > 0) {
       const newTotalQuantity = cartItems.reduce(
         (accumulator, currentItem) =>
@@ -15,42 +15,83 @@ const CheckoutButton = ({ cartItems }) => {
         0
       );
 
+      const newTotal = cartItems.reduce(
+        (accumulator, currentItem) =>
+          accumulator + currentItem.subtotal * currentItem.quantity,
+        0
+      );
+
+      setTotal(newTotal);
       setTotalQuantity(newTotalQuantity);
     } else {
-      // If cartItems is undefined or empty, reset total quantity
+      // If cartItems is undefined or empty, reset totals
+      setTotal(0);
       setTotalQuantity(0);
     }
   }, [cartItems]);
 
   const handleCheckout = () => {
-    // Calculate subtotal for each product in the cart
+    // Checkout logic
     const subtotalDetails = cartItems.map((item) => {
-      const itemQuantity = Number(item.quantity) || 0;
-      const itemPrice = item.productId ? Number(item.productId.price) || 0 : 0;
-      const subtotal = itemQuantity * itemPrice;
+      console.log("item", item);
 
-      return {
-        product: item.productId ? item.productId.name : "Unknown Product",
-        subtotal: subtotal.toFixed(2), // Format subtotal to two decimal places
-      };
+      // Check if item has productId and price properties
+      if (item.productId && item.productId.price) {
+        const itemQuantity = Number(item.quantity) || 0;
+        const itemPrice = Number(item.productId.price) || 0;
+        const subtotal = itemQuantity * itemPrice;
+
+        return {
+          product: item.productId.name,
+          subtotal: subtotal.toFixed(2),
+        };
+      } else {
+        console.log("Invalid item:", item);
+        return {
+          product: "Unknown Product",
+          subtotal: "0.00",
+        };
+      }
     });
 
-    // Implement your checkout logic here
-    // This can include sending the order to the server, updating the database, etc.
+    console.log("subtotalDetails", subtotalDetails);
 
-    // For this example, we'll just show an alert with the total quantity and subtotal details
     Swal.fire({
       icon: "success",
       title: "Checkout Successful!",
       html:
         `<p>Total Quantity: ${totalQuantity}</p>` +
-        `<p>Subtotal Details:</p>` +
-        `<ul>${subtotalDetails
-          .map((detail) => `<li>${detail.product}: $${detail.subtotal}</li>`)
-          .join("")}</ul>`,
+        `<p>Total Amount: $${total.toFixed(2)}</p>`,
     });
 
-    // You can clear the cart or perform any additional actions here
+    // Send a request to your server to create an order
+    fetch("http://localhost:4000/orders/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+      body: JSON.stringify({
+        items: cartItems.map((item) => ({
+          productId: item.productId._id,
+          quantity: item.quantity,
+          subtotal: item.subtotal,
+        })),
+        totalPrice: total,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "Order created successfully") {
+          // Clear the cart after a successful checkout
+          fetchData();
+        } else {
+          console.error("Failed to create order:", data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error creating order:", error);
+      });
   };
 
   return (

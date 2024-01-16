@@ -1,25 +1,21 @@
-// Mini Activity:
-// Import all necessary react-bootstrap modules in one line
-// import Container from 'react-bootstrap/Container';
-// import Nav from 'react-bootstrap/Nav';
-// import Navbar from 'react-bootstrap/Navbar';
-
-import { Container, Nav, Navbar } from "react-bootstrap";
+import React, { useContext } from "react";
+import {
+  Container,
+  Nav,
+  Navbar,
+  Form,
+  FormControl,
+  Button,
+} from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-// - Modules are treated as objects and object deconstruction may be applied in order to shorten the syntax when importing modules from same packages
-
-import { useContext } from "react";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import UserContext from "../UserContext";
 
 export default function AppNavbar() {
-  // state
-  // const [user, setUser] = useState(localStorage.getItem("access"));
-  // console.log(user);
-
   const { user } = useContext(UserContext);
 
   return (
-    <Navbar expand="lg" bg="dark" data-bs-theme="dark">
+    <Navbar expand="lg" bg="dark" variant="dark">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           GadgetCo.
@@ -42,7 +38,6 @@ export default function AppNavbar() {
                   <Nav.Link as={NavLink} to="/profile">
                     Profile
                   </Nav.Link>
-
                   <Nav.Link as={NavLink} to="/logout">
                     Logout
                   </Nav.Link>
@@ -53,7 +48,7 @@ export default function AppNavbar() {
                     Profile
                   </Nav.Link>
                   <Nav.Link as={NavLink} to="/cart">
-                    Cart
+                    <ShoppingCartIcon />
                   </Nav.Link>
                   <Nav.Link as={NavLink} to="/logout">
                     Logout
@@ -71,6 +66,10 @@ export default function AppNavbar() {
               </>
             )}
           </Nav>
+          <Form className="d-flex">
+            <FormControl type="text" placeholder="Search" className="mr-2" />
+            <Button variant="outline-success">Search</Button>
+          </Form>
         </Navbar.Collapse>
       </Container>
     </Navbar>

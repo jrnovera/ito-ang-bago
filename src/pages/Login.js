@@ -2,19 +2,20 @@ import { Form, Button } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
 import UserContext from "../UserContext";
 import { Navigate } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+import Input from "@mui/material/Input";
+import LinearProgress from "@mui/material/LinearProgress";
+import Typography from "@mui/material/Typography";
+import Key from "@mui/icons-material/Key";
 
 export default function Login() {
-  // State hooks to store the values of the input fields
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // State to determine whether submit button is enabled or not
   const [isActive, setIsActive] = useState(true);
 
   const { user, setUser } = useContext(UserContext);
 
-  // useEffect() will be triggered every time the state of email and password changes
   useEffect(() => {
-    // Validation to enable submit button when all fields are populated and both passwords match
     if (email !== "" && password !== "") {
       setIsActive(true);
     } else {
@@ -23,7 +24,6 @@ export default function Login() {
   }, [email, password]);
 
   function authenticate(e) {
-    // Prevents page redirection via form submission
     e.preventDefault();
 
     fetch("http://localhost:4000/users/login", {
@@ -38,12 +38,9 @@ export default function Login() {
     })
       .then((res) => res.json())
       .then((data) => {
-        // successful login
         if (data.access) {
           localStorage.setItem("access", data.access);
-          // setUser(data); // user = {access: adskjaslkdqwk }
           retrieveUserDetails(data.access);
-
           alert(`You are now logged in`);
         } else if (data.error == "No Email Found") {
           alert(`Email not found`);
@@ -51,7 +48,7 @@ export default function Login() {
           alert(`${email} does not exist`);
         }
       });
-    // Clear input fields after submission
+
     setEmail("");
     setPassword("");
   }
@@ -89,16 +86,37 @@ export default function Login() {
         />
       </Form.Group>
 
-      <Form.Group controlId="password">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
+      <Stack
+        spacing={0.5}
+        sx={{
+          "--hue": Math.min(password.length * 10, 120),
+        }}>
+        <Input
           type="password"
           placeholder="Password"
+          startAdornment={<Key />}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-      </Form.Group>
+        <LinearProgress
+          determinate
+          size="sm"
+          value={Math.min((password.length * 100) / 12, 100)}
+          sx={{
+            bgcolor: "background.level3",
+            color: "hsl(var(--hue) 80% 40%)",
+          }}
+        />
+        <Typography
+          variant="body2"
+          sx={{ alignSelf: "flex-end", color: "hsl(var(--hue) 80% 30%)" }}>
+          {password.length < 3 && "Very weak"}
+          {password.length >= 3 && password.length < 6 && "Weak"}
+          {password.length >= 6 && password.length < 10 && "Strong"}
+          {password.length >= 10 && "Very strong"}
+        </Typography>
+      </Stack>
 
       {isActive ? (
         <Button variant="primary" type="submit" id="submitBtn">

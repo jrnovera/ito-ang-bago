@@ -17,20 +17,22 @@ const RandomGadgetCarousel = () => {
   };
 
   return (
-    <Carousel
-      activeIndex={index}
-      onSelect={handleSelect}
-      className="my-carousel">
-      {gadgetImages.map((image, idx) => (
-        <Carousel.Item key={idx}>
-          <img
-            className="d-block w-100"
-            src={image}
-            alt={`Gadget ${idx + 1}`}
-          />
-        </Carousel.Item>
-      ))}
-    </Carousel>
+    <div>
+      <Carousel
+        activeIndex={index}
+        onSelect={handleSelect}
+        className="my-carousel">
+        {gadgetImages.map((image, idx) => (
+          <Carousel.Item key={idx}>
+            <img
+              className="d-block w-100"
+              src={image}
+              alt={`Gadget ${idx + 1}`}
+            />
+          </Carousel.Item>
+        ))}
+      </Carousel>
+    </div>
   );
 };
 

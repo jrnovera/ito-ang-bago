@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
+
 const CheckoutButton = ({ cartItems }) => {
   const [total, setTotal] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);

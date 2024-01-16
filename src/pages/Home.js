@@ -3,7 +3,8 @@ import Banner from "../components/Banner";
 import Highlights from "../components/Highlights";
 import FeaturedProduct from "../components/FeaturedProduct";
 import RandomGadgetCarousel from "../components/Caurosel";
-
+import Video from "../components/Video";
+import OffersCards from "../components/FooterImages";
 // import ProductCatalog from "../components/ProductsCatalog";
 
 export default function Home() {
@@ -35,7 +36,15 @@ export default function Home() {
     <>
       <Banner data={data} />
       <RandomGadgetCarousel />
+      <hr style={{ marginBottom: "200px" }} />
       <FeaturedProduct />
+      <Video />
+      <hr style={{ marginBottom: "200px", color: "white" }} />
+      <h2>
+        The GadgetCo experience. Do even more with GadgetCo products and
+        services.
+      </h2>
+      <OffersCards />
       <Highlights />
       {/* {loading ? <p>Loading...</p> : <ProductCatalog products={products} />} */}
     </>

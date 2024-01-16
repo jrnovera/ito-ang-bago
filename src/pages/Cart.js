@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import RemoveFromCartButton from "../components/RemoveFromCartButton";
 import CheckoutAndTotalButton from "../components/CheckOutTOTAL";
 import ClearCartButton from "../components/ClearCartButton";
-
+import { NavLink } from "react-router-dom";
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
 
@@ -67,8 +67,23 @@ const CartPage = () => {
           ))}
         </tbody>
       </Table>
-      <ClearCartButton cartItems={cartItems} />
-      <CheckoutAndTotalButton cartItems={cartItems} />
+      <div>
+        <ClearCartButton cartItems={cartItems} />
+
+        <Button
+          className="btn btn-success"
+          style={{
+            color: "white",
+            fontSize: "30px",
+            padding: "15px",
+            textDecoration: "none",
+          }}>
+          {" "}
+          <NavLink as={NavLink} to="/get-cart">
+            Checkout
+          </NavLink>
+        </Button>
+      </div>
     </div>
   );
 };

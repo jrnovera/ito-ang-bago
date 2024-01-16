@@ -13,12 +13,13 @@ import AddProduct from "./pages/AddProduct";
 import Profile from "./pages/Profile";
 import Redirect from "./components/Redirect";
 import CartPage from "./pages/Cart";
+import CheckoutOrders from "./pages/Orders";
 // npm install react-router-dom
 // react-router-dom is a library for handling navigation and routing in React applications
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { UserProvider } from "./UserContext";
-
+import CheckoutPage from "./pages/CheckOutPage";
 
 /*
   <Router> serves as a container for the entire routing logic
@@ -76,7 +77,9 @@ function App() {
             <Route path="/addProduct" element={<AddProduct />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/cart" element={<CartPage />} />
-            <Route path = "/redirect" element={<Redirect />} />
+            <Route path="/get-cart" element={<CheckoutPage />} />
+            <Route path="/redirect" element={<Redirect />} />
+            <Route path="/orders" element={<CheckoutOrders />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </Container>

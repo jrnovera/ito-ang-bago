@@ -3,18 +3,21 @@ import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const RemoveFromCartButton= ({ productId, fetchData }) => {
+const RemoveFromCartButton = ({ productId, fetchData }) => {
   const navigate = useNavigate();
   const handleRemoveFromCart = async () => {
     try {
       console.log("Removing product with ID:", productId);
 
-      const response = await fetch(`http://localhost:4000/cart/${productId}/remove-from-cart`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
-      });
+      const response = await fetch(
+        `http://localhost:4000/cart/${productId}/remove-from-cart`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+        }
+      );
 
       const data = await response.json();
       console.log(data);
@@ -25,8 +28,7 @@ const RemoveFromCartButton= ({ productId, fetchData }) => {
           title: data.message,
         });
 
-      navigate("/redirect");
-
+        navigate("/redirect");
       } else {
         Swal.fire({
           icon: "error",
@@ -50,4 +52,3 @@ const RemoveFromCartButton= ({ productId, fetchData }) => {
 };
 
 export default RemoveFromCartButton;
-
