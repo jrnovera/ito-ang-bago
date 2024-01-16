@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import RemoveFromCartButton from "../components/RemoveFromCartButton";
-import CheckoutAndTotalButton from "../components/CheckOutTOTAL";
+
 import ClearCartButton from "../components/ClearCartButton";
 import { NavLink } from "react-router-dom";
 const CartPage = () => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Container, Row, Col, hr } from "react-bootstrap";
 import Banner from "../components/Banner";
 import Highlights from "../components/Highlights";
 import FeaturedProduct from "../components/FeaturedProduct";
@@ -33,20 +34,29 @@ export default function Home() {
   }, []); // Empty dependency array to run the effect only once on mount
 
   return (
-    <>
+    <Container>
       <Banner data={data} />
       <RandomGadgetCarousel />
-      <hr style={{ marginBottom: "200px" }} />
+      <hr style={{ marginBottom: "2rem" }} />
       <FeaturedProduct />
       <Video />
-      <hr style={{ marginBottom: "200px", color: "white" }} />
-      <h2>
+      <hr style={{ marginBottom: "2rem", color: "white" }} />
+      <h2 className="mb-4">
         The GadgetCo experience. Do even more with GadgetCo products and
         services.
       </h2>
-      <OffersCards />
-      <Highlights />
+      <hr style={{ width: "100%" }} />
+      <Row className="mb-4">
+        <Col xs={12}>
+          <OffersCards />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
+          <Highlights />
+        </Col>
+      </Row>
       {/* {loading ? <p>Loading...</p> : <ProductCatalog products={products} />} */}
-    </>
+    </Container>
   );
 }

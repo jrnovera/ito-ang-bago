@@ -1,5 +1,6 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const OffersCards = () => {
   const offerCardsData = [
@@ -26,27 +27,33 @@ const OffersCards = () => {
   ];
 
   return (
-    <div style={{ display: "flex", justifyContent: "space-around" }}>
-      {offerCardsData.map((card) => (
-        <Card
-          key={card.id}
-          style={{
-            width: "550px",
-            cursor: "pointer",
-            transition: "transform 0.3s ease-in-out",
-          }}
-          className="m-2"
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.transform = "scale(1.05)")
-          }
-          onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}>
-          <Card.Img
-            variant="top"
-            src={card.imageSrc}
-            alt={`Offer ${card.id}`}
-          />
-        </Card>
-      ))}
+    <div>
+      <div className="d-flex flex-wrap justify-content-around">
+        {offerCardsData.map((card) => (
+          <Col key={card.id} xs={12} sm={6} md={4} lg={3}>
+            <Link to="/products">
+              <Card
+                style={{
+                  cursor: "pointer",
+                  transition: "transform 0.3s ease-in-out",
+                }}
+                className="m-2"
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.05)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }>
+                <Card.Img
+                  variant="top"
+                  src={card.imageSrc}
+                  alt={`Offer ${card.id}`}
+                />
+              </Card>
+            </Link>
+          </Col>
+        ))}
+      </div>
     </div>
   );
 };

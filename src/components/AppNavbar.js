@@ -15,7 +15,7 @@ export default function AppNavbar() {
   const { user } = useContext(UserContext);
 
   return (
-    <Navbar expand="lg" bg="dark" variant="dark">
+    <Navbar expand="lg" bg="dark" variant="dark" style={{ padding: "20px" }}>
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           GadgetCo.

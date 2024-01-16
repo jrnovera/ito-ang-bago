@@ -1,33 +1,29 @@
-import { useState, useEffect, useContext } from "react";
-import { Container, Card, Button, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect, useContext } from "react";
+import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import { useParams, useNavigate, Link } from "react-router-dom";
-
 import UserContext from "../UserContext";
+import AddToCartButton from "../components/AddtoCart";
 
 export default function ProductView() {
   const { productId } = useParams();
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
+  const [product, setProduct] = useState({});
   const navigate = useNavigate();
-
   const { user } = useContext(UserContext);
 
-  const getProduct = (productId) => {
-    console.log("Fetching product details for productId:", productId);
-    fetch(`http://localhost:4000/product/${productId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Product details fetched:", data);
-
-        setName(data.name);
-        setDescription(data.description);
-        setPrice(data.price);
-      });
-  };
-
   useEffect(() => {
-    getProduct(productId);
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:4000/products/${productId}`
+        );
+        const data = await response.json();
+        setProduct(data);
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+      }
+    };
+
+    fetchProduct();
   }, [productId]);
 
   return (
@@ -36,21 +32,13 @@ export default function ProductView() {
         <Col lg={{ span: 6, offset: 3 }}>
           <Card>
             <Card.Body className="text-center">
-              <Card.Title>{name}</Card.Title>
+              <Card.Title>{product.name}</Card.Title>
               <Card.Subtitle>Description:</Card.Subtitle>
-              <Card.Text>{description}</Card.Text>
+              <Card.Text>{product.description}</Card.Text>
               <Card.Subtitle>Price:</Card.Subtitle>
-              <Card.Text>PhP {price}</Card.Text>
+              <Card.Text>PhP {product.price}</Card.Text>
               {user.id !== null ? (
-                <Button
-                  variant="primary"
-                  block="true"
-                  onClick={() => {
-                    getProduct(productId);
-                    navigate(`/products`);
-                  }}>
-                  Buy
-                </Button>
+                <AddToCartButton productId={productId} fetchData={() => {}} />
               ) : (
                 <Link className="btn btn-danger btn-block" to="/products">
                   Buy Item
