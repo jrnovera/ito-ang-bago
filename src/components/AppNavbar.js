@@ -10,7 +10,7 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import UserContext from "../UserContext";
-
+import MobileFriendlyOutlinedIcon from "@mui/icons-material/MobileFriendlyOutlined";
 export default function AppNavbar() {
   const { user } = useContext(UserContext);
 
@@ -19,6 +19,7 @@ export default function AppNavbar() {
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           GadgetCo.
+          <MobileFriendlyOutlinedIcon />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

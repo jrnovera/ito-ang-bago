@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, hr } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Banner from "../components/Banner";
 import Highlights from "../components/Highlights";
 import FeaturedProduct from "../components/FeaturedProduct";
 import RandomGadgetCarousel from "../components/Caurosel";
 import Video from "../components/Video";
 import OffersCards from "../components/FooterImages";
-// import ProductCatalog from "../components/ProductsCatalog";
+import MobileFriendlyOutlinedIcon from "@mui/icons-material/MobileFriendlyOutlined";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const data = {
-    title: "GadgetCo.",
+    title: (
+      <>
+        GadgetCo.
+        <MobileFriendlyOutlinedIcon
+          fontSize="inherit"
+          style={{ marginLeft: "0.5rem" }}
+        />
+      </>
+    ),
     content: "Bringing Innovation to Your Fingertips",
     destination: "/products",
     label: "Buy Now!",
@@ -21,20 +29,20 @@ export default function Home() {
 
   useEffect(() => {
     // Fetch products from your database/API
-    fetch("http://localhost:4000/products/")
+    fetch(`http://localhost:4000/products/`)
       .then((response) => response.json())
       .then((data) => {
-        setProducts(data); // Set the fetched products in state
-        setLoading(false); // Set loading to false
+        setProducts(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
-        setLoading(false); // Set loading to false even on error
+        setLoading(false);
       });
-  }, []); // Empty dependency array to run the effect only once on mount
+  }, []);
 
   return (
-    <Container>
+    <Container fluid style={{ padding: 0 }}>
       <Banner data={data} />
       <RandomGadgetCarousel />
       <hr style={{ marginBottom: "2rem" }} />
@@ -56,7 +64,6 @@ export default function Home() {
           <Highlights />
         </Col>
       </Row>
-      {/* {loading ? <p>Loading...</p> : <ProductCatalog products={products} />} */}
     </Container>
   );
 }

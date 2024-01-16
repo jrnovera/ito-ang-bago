@@ -41,10 +41,10 @@ export default function AddProduct() {
         if (data == true) {
           Swal.fire({
             icon: "success",
-            title: "Course Added",
+            title: "Product Added",
           });
 
-          navigate("/product");
+          navigate("/products");
         } else {
           Swal.fire({
             icon: "error",

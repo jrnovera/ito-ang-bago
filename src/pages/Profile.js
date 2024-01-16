@@ -5,14 +5,14 @@ import { Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ResetPassword from "../components/ResetPassword";
 import UpdateProfile from "../components/UpdateProfile";
-import SearchProductByPrice from "../components/ProductSearch";
+
 export default function Profile() {
   const { user } = useContext(UserContext);
 
   const [details, setDetails] = useState({});
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
+    fetch(`$http://localhost:4000/users/details`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
       },

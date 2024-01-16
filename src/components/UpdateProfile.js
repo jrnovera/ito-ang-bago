@@ -20,22 +20,19 @@ const UpdateProfile = ({ userDetails }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/users/profile`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access")}`, // Use directly here
-          },
-          body: JSON.stringify({
-            firstName: newFirstName,
-            lastName: newLastName,
-            mobileNo: newMobileNo,
-            email: newEmail,
-          }),
-        }
-      );
+      const response = await fetch(`$http://localhost:4000/users/profile`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`, // Use directly here
+        },
+        body: JSON.stringify({
+          firstName: newFirstName,
+          lastName: newLastName,
+          mobileNo: newMobileNo,
+          email: newEmail,
+        }),
+      });
 
       if (response.ok) {
         // Show success message with SweetAlert

@@ -10,7 +10,7 @@ const SearchProductByName = () => {
 
   const handleSearchByName = () => {
     // Send a request to the server to search for products by name
-    fetch(`${process.env.REACT_APP_API_URL}/products/search`, {
+    fetch(`$http://localhost:4000/products/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

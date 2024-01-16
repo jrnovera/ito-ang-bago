@@ -11,7 +11,7 @@ const SearchProductByPrice = () => {
 
   const handleSearchByPrice = () => {
     // Send a request to the server to search for products by price range
-    fetch(`${process.env.REACT_APP_API_URL}/products/searchByPrice`, {
+    fetch(`$http://localhost:4000/products/searchByPrice`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

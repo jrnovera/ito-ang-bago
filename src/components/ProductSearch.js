@@ -19,7 +19,7 @@ const SearchProductByPrice = () => {
 
   const searchProducts = (params) => {
     // Send a request to the server to search for products based on the given parameters
-    fetch(`${process.env.REACT_APP_API_URL}/products/search`, {
+    fetch(`http://localhost:4000/products/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,6 @@ const SearchProductByPrice = () => {
             text: `${data.products.length} products match the specified criteria.`,
           });
           setProducts(data.products);
-          
 
           // Scroll to the last product in the list
           lastProductRef.current.scrollIntoView({ behavior: "smooth" });

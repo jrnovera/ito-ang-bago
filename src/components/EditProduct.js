@@ -4,8 +4,6 @@ import Swal from "sweetalert2";
 
 export default function EditProduct({ product, fetchData }) {
   console.log("Environment: ");
-  console.log(process.env);
-  console.log(process.env.REACT_APP_API_URL);
 
   // state for courseId for the fetch URl
   const [productId, setProductId] = useState("");
@@ -56,7 +54,7 @@ export default function EditProduct({ product, fetchData }) {
   const editProduct = (e, productId) => {
     e.preventDefault();
 
-    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`, {
+    fetch(`http://localhost:4000/products/${productId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
