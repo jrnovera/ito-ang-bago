@@ -17,14 +17,16 @@ const CheckoutButton = ({ cartItems, fetchData }) => {
       body: JSON.stringify({ cartItems }),
     })
       .then((res) => res.json())
+
       .then((data) => {
-        if (data.message === true) {
+        console.log(data);
+        if (data.message === "Order created successfully") {
           Swal.fire({
             icon: "success",
             title: "Checkout Successful!",
             text: "Your order has been created successfully.",
           });
-          fetchData(); // Fetch updated product data after successful checkout
+          // Fetch updated product data after successful checkout
         } else {
           Swal.fire({
             icon: "error",
@@ -32,17 +34,6 @@ const CheckoutButton = ({ cartItems, fetchData }) => {
             text: "Failed to create the order. Please try again.",
           });
         }
-      })
-      .catch((error) => {
-        console.error("Error during checkout:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Checkout Failed",
-          text: "An error occurred during checkout. Please try again.",
-        });
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
 

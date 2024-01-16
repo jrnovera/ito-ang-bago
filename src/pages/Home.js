@@ -47,7 +47,7 @@ export default function Home() {
       </h2>
       <hr style={{ width: "100%" }} />
       <Row className="mb-4">
-        <Col xs={12}>
+        <Col xs={12} lg={12}>
           <OffersCards />
         </Col>
       </Row>

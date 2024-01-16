@@ -39,7 +39,7 @@ const ProductCard = ({ product, fetchData }) => {
       <Card.Body>
         <Card.Img
           variant="top"
-          src={"https://via.placeholder.com/150"}
+          src={"../images/" + name + "iPhone.jpg"}
           alt={name}
         />
         <Card.Title>{name}</Card.Title>
