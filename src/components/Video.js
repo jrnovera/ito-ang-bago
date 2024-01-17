@@ -7,7 +7,7 @@ const Video = () => {
       loop
       muted
       style={{
-        width: "80%", // Adjust the width as needed
+        width: "100%", // Adjust the width as needed
         height: "auto", // Maintain aspect ratio
         display: "block",
         margin: "auto",
