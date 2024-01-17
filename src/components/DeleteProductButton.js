@@ -16,7 +16,7 @@ const DeleteProductButton = ({ productId, fetchData }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Call your API to delete the product
-        fetch(`http://localhost:3000/products/${productId}`, {
+        fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

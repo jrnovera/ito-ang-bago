@@ -68,8 +68,8 @@ export default function AppNavbar() {
             )}
           </Nav>
           <Form className="d-flex">
-            <FormControl type="text" placeholder="Search" className="mr-2" />
-            <Button variant="outline-success">Search</Button>
+            {/* <FormControl type="text" placeholder="Search" className="mr-2" />
+            <Button variant="outline-success">Search</Button> */}
           </Form>
         </Navbar.Collapse>
       </Container>

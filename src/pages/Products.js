@@ -20,8 +20,8 @@ export default function Product() {
     // Allows to have a dynamic url depending whether the user that's logged in is an admin or not
     let fetchUrl =
       user.isAdmin === true
-        ? "http://localhost:4000/products/all"
-        : "http://localhost:4000/products/";
+        ? `${process.env.REACT_APP_API_URL}/all`
+        : `${process.env.REACT_APP_API_URL}/products/`;
 
     // headers is included for both /courses/all and /courses/ to allow flexibility even if it is not needed.
     fetch(fetchUrl, {

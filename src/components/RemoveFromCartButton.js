@@ -10,7 +10,7 @@ const RemoveFromCartButton = ({ productId, fetchData }) => {
       console.log("Removing product with ID:", productId);
 
       const response = await fetch(
-        `http://localhost:4000/cart/${productId}/remove-from-cart`,
+        `${process.env.REACT_APP_API_URL}/cart/${productId}/remove-from-cart`,
         {
           method: "DELETE",
           headers: {

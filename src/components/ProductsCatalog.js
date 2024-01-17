@@ -7,7 +7,7 @@ const ProductCatalog = () => {
 
   useEffect(() => {
     // Fetch all active products
-    fetch("http://localhost:4000/products/")
+    fetch(`${process.env.REACT_APP_API_URL}/products/`)
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));

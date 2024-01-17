@@ -77,7 +77,7 @@ export default function FeaturedProduct() {
 
   useEffect(() => {
     console.log("Fetching featured products...");
-    fetch(`http://localhost:4000/products/`)
+    fetch(`${process.env.REACT_APP_API_URL}/products/`)
       .then((res) => res.json())
       .then((data) => {
         const numbers = [];

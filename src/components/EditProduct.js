@@ -31,7 +31,7 @@ export default function EditProduct({ product, fetchData }) {
   // openEdit function is for retrieving a specific course
   const openEdit = (productId) => {
     // Request to get a specific course
-    fetch(`http://localhost:4000/products/${productId}`)
+    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`)
       .then((res) => res.json())
       .then((data) => {
         setProductId(data._id);

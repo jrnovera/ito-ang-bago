@@ -8,7 +8,7 @@ const Orders = () => {
 
   useEffect(() => {
     // Fetch orders when the component mounts
-    fetch("http://localhost:4000/orders/my-orders", {
+    fetch(`${process.env.REACT_APP_API_URL}/orders/my-orders`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,

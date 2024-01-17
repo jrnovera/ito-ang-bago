@@ -14,7 +14,7 @@ export default function ProductView() {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/products/${productId}`
+          `${process.env.REACT_APP_API_URL}/products/${productId}`
         );
         const data = await response.json();
         setProduct(data);

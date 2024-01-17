@@ -9,7 +9,7 @@ const CartPage = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:4000/cart/get-cart", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/get-cart`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,

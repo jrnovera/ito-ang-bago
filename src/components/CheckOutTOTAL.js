@@ -8,7 +8,7 @@ const CheckoutButton = ({ cartItems, fetchData }) => {
   const handleCheckout = () => {
     setLoading(true);
 
-    fetch("http://localhost:4000/orders/checkout", {
+    fetch(`${process.env.REACT_APP_API_URL}/orders/checkout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

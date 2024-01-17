@@ -10,7 +10,7 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     // Fetch cart items from the server
-    fetch(`http://localhost:4000/cart/get-cart`, {
+    fetch(`${process.env.REACT_APP_API_URL}/cart/get-cart`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,

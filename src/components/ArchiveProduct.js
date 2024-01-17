@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 export default function ArchiveProducts({ productId, fetchData, isActive }) {
   function archiveToggle() {
-    fetch(`http://localhost:4000/products/${productId}/archive`, {
+    fetch(`${process.env.REACT_APP_API_URL}/products/${productId}/archive`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,

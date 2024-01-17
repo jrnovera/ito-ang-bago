@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const ClearCartButton = ({ removeAll }) => {
   const handleClearCart = () => {
-    fetch(`http://localhost:4000/cart/clear-cart`, {
+    fetch(`${process.env.REACT_APP_API_URL}/cart/clear-cart`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
