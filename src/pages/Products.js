@@ -37,11 +37,11 @@ export default function Product() {
         // Sets the "courses" state to map the data retrieved from the fetch request into several "CourseCard" components
         // If the data.message is not a string or equal to undefined it will set the courses state with the courses from fetch
         if (data) {
-          setProduct(data.product);
+          setProduct(data);
         } else {
           setProduct([]);
         }
-        console.log(data.product);
+        console.log(data);
       });
   };
 
