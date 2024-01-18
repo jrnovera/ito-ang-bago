@@ -21,7 +21,7 @@ export default function Product() {
     let fetchUrl =
       user.isAdmin === true
         ? `${process.env.REACT_APP_API_URL}/all`
-        : `${process.env.REACT_APP_API_URL}/products/`;
+        : `${process.env.REACT_APP_API_URL}/products`;
 
     // headers is included for both /courses/all and /courses/ to allow flexibility even if it is not needed.
     fetch(fetchUrl, {
