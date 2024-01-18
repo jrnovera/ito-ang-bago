@@ -1,4 +1,4 @@
-// Entry point
+    // Entry point
 
 // npm install -g create-react-app@latest
 // npx create-react-app your-app-name
